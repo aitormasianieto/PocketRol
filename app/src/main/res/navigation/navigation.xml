@@ -6,7 +6,7 @@
     app:startDestination="@id/characterCardFragment2">
     <fragment
         android:id="@+id/characterCardFragment2"
-        android:name="org.ieselcaminas.aitor.pocketrol.CharacterCardFragment"
+        android:name="org.ieselcaminas.aitor.pocketrol.charactercard.CharacterCardFragment"
         android:label="fragment_character_card"
         tools:layout="@layout/fragment_character_card" />
 </navigation>

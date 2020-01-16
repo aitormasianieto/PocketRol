@@ -3,15 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable
-            name="characterCardViewModel"
-            type="org.ieselcaminas.aitor.pocketrol.charactercard.CharacterCardViewModel" />
+
     </data>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".charactercard.CharacterCardFragment">
+        tools:context=".characters.CharactersFragment">
 
         <TextView
             android:layout_width="match_parent"
