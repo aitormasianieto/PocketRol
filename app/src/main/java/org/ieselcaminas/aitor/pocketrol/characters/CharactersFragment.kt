@@ -14,9 +14,12 @@ class CharactersFragment : Fragment() {
     private lateinit var viewModel: CharactersViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val binding: FragmentCharactersBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_character_card, container, false)
+        val binding: FragmentCharactersBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_characters, container, false)
 
-        
+        val adapter = CharacterAdapter(CharacterListener { nightId ->
+            //sleepTrackerViewModel.onSleepNightClicked(nightId)
+        })
+        binding.sleepList.adapter = adapter
 
         return binding.root
     }
