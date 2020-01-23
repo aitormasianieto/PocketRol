@@ -16,7 +16,7 @@ class CharactersFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding: FragmentCharactersBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_characters, container, false)
 
-        val adapter = CharacterAdapter(CharacterListener { nightId ->
+        val adapter = CharacterAdapter(CharacterListener { characterId ->
             //sleepTrackerViewModel.onSleepNightClicked(nightId)
         })
         binding.sleepList.adapter = adapter

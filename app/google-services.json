@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "30461313252",
+    "firebase_url": "https://pocket-rol.firebaseio.com",
+    "project_id": "pocket-rol",
+    "storage_bucket": "pocket-rol.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:30461313252:android:8550517f808d4a82126cf1",
+        "android_client_info": {
+          "package_name": "org.ieselcaminas.aitor.pocketrol"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "30461313252-qmk79jppij3u6dcc8ksirt51vugfth5a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.ieselcaminas.aitor.pocketrol",
+            "certificate_hash": "6ffcdb8e10de7d490557a8d0377a106c4be8822f"
+          }
+        },
+        {
+          "client_id": "30461313252-osm23p22bstj16jr7oovvt83m0b227n8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDe6PRCupQTitINjxnzHMj1lAYiAmPml6Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "30461313252-osm23p22bstj16jr7oovvt83m0b227n8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

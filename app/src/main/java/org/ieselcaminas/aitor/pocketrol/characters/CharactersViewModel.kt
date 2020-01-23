@@ -1,7 +1,10 @@
 package org.ieselcaminas.aitor.pocketrol.characters
 
 import androidx.lifecycle.ViewModel
+import com.google.firebase.firestore.FirebaseFirestore
+
 
 class CharactersViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
+
+    var db = FirebaseFirestore.getInstance()
 }

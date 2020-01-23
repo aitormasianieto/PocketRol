@@ -13,6 +13,8 @@ buildscript {
         // MINE
         // Navigation & SafeArgs (Needed for an app plugin)
         classpath "android.arch.navigation:navigation-safe-args-gradle-plugin:1.0.0"
+        //Google Login
+        classpath 'com.google.gms:google-services:4.2.0'
     }
 }
 

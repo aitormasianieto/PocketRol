@@ -3,10 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/characterCardFragment2">
+    app:startDestination="@id/charactersFragment">
     <fragment
-        android:id="@+id/characterCardFragment2"
-        android:name="org.ieselcaminas.aitor.pocketrol.charactercard.CharacterCardFragment"
-        android:label="fragment_character_card"
-        tools:layout="@layout/fragment_character_card" />
+        android:id="@+id/loginFragment"
+        android:name="org.ieselcaminas.aitor.pocketrol.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/charactersFragment"
+        android:name="org.ieselcaminas.aitor.pocketrol.characters.CharactersFragment"
+        android:label="CharactersFragment" />
 </navigation>

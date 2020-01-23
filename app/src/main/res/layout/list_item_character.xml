@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:onClick="@{() -> clickListener.onClick(sleep)}">
+        android:onClick="@{() -> clickListener.onClick(chr)}">
 
         <ImageView
             android:id="@+id/quality_image"
@@ -30,8 +30,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@drawable/ic_launcher_background"
-            app:sleepImage="@{sleep}"/> <!--Esta etiqueta le hemos creado nosotros//esta en el bindingUtils-->
+            tools:srcCompat="@drawable/ic_launcher_background"/>
+            <!--app:sleepImage="@{chr}"/> <!-Esta etiqueta le hemos creado nosotros//esta en el bindingUtils-->
 
         <TextView
             android:id="@+id/quality_string"
@@ -40,8 +40,8 @@
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="@+id/quality_image"
             app:layout_constraintStart_toStartOf="@+id/quality_image"
-            app:layout_constraintTop_toBottomOf="@+id/quality_image"
-            app:sleepQualityString="@{sleep}"/>
+            app:layout_constraintTop_toBottomOf="@+id/quality_image"/>
+            <!--app:sleepQualityString="@{chr}"/>-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
