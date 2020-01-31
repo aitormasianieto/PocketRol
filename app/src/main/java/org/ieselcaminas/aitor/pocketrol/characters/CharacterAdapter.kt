@@ -12,36 +12,39 @@ import org.ieselcaminas.aitor.pocketrol.database.Character
 
 class CharacterAdapter(private val context: Context): RecyclerView.Adapter<CharacterAdapter.ItemViewHolder>() {
 
+    //Data array
     private var dataList = mutableListOf<Character>()
     fun setListData(data: MutableList<Character>) {
         dataList = data
     }
 
+    //Holder "Constructor"
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_character, parent, false)
         return ItemViewHolder(view)
     }
 
     override fun getItemCount(): Int {
-        if (dataList.size < 0) {
-            return dataList.size
+        return if (dataList.size > 0) {
+            dataList.size
         }
         else {
-
+            0
         }
     }
 
+    //Makes the bind between the dataArray and the viewHolder
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val chr = dataList[position]
         holder.bindView(chr)
     }
 
     inner class ItemViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-
+        //binds data into each field
         fun bindView(chr: Character) {
             Glide.with(context).load(chr.imageUrl).into((itemView.circleImageView))
             itemView.chrName_textView.text = chr.name
-            itemView.chrDesc_textView.text = chr.characterId.toString()
+            itemView.chrDesc_textView.text = chr.race
         }
     }
 

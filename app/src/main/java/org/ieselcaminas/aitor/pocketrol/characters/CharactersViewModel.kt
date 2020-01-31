@@ -4,22 +4,21 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.FirebaseFirestore
+import org.ieselcaminas.aitor.pocketrol.database.Character
+import org.ieselcaminas.aitor.pocketrol.database.Repo
 
 
 class CharactersViewModel : ViewModel() {
 
-    var db = FirebaseFirestore.getInstance() //ns donde ponerlo bb
+    val repo = Repo()
+    fun fetchCharacterData(): LiveData<MutableList<Character>> {
+        val mutableLiveData = MutableLiveData<MutableList<Character>>()
 
+        //Its observing when 'Repo' has recived the data
+        repo.getCharacterData().observeForever {
+            mutableLiveData.value = it
+        }
 
-    private val _navigateToCharacterCard = MutableLiveData<Long>()
-    val navigateToSleepDataQuality: LiveData<Long>
-        get() = _navigateToCharacterCard
-
-    fun onCharacterClicked(id: Long) {
-        _navigateToCharacterCard.value = id
-    }
-
-    fun onCharacterNavigated() {
-        _navigateToCharacterCard.value = null
+        return mutableLiveData
     }
 }
