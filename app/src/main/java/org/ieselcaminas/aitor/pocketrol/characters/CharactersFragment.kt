@@ -14,24 +14,25 @@ import org.ieselcaminas.aitor.pocketrol.databinding.FragmentCharactersBinding
 
 class CharactersFragment : Fragment() {
 
+    private lateinit var binding: FragmentCharactersBinding
     private lateinit var adapter: CharacterAdapter
     private val viewModel by lazy { ViewModelProviders.of(this).get(CharactersViewModel::class.java) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Get a reference to the binding object and inflate the fragment views.
-        val binding: FragmentCharactersBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_characters, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_characters, container, false)
 
         //RecyclerView
         adapter = CharacterAdapter(context!!)
         binding.chrRecyclerView.layoutManager = LinearLayoutManager(context)
         binding.chrRecyclerView.adapter = adapter
-        observeData(binding)
+        observeData()
 
         return binding.root
     }
 
-    fun observeData(binding: FragmentCharactersBinding) {
-        binding.shimmerViewContainer.startShimmer()
+    fun observeData() {
+        binding.shimmerViewContainer.startShimmer() //Shimmer is a charges animation
 
         viewModel.fetchCharacterData().observe(viewLifecycleOwner, Observer {
             binding.shimmerViewContainer.visibility = View.GONE
