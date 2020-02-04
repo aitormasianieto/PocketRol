@@ -4,13 +4,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data></data>
+    <data>
+        <variable
+            name="character"
+            type="org.ieselcaminas.aitor.pocketrol.database.Character" />
+
+        <variable
+            name="clickListener"
+            type="org.ieselcaminas.aitor.pocketrol.characters.CharacterListener"/>
+    </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="8dp">
+        android:padding="8dp"
+        android:onClick="@{() -> clickListener.onClick(character)}">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/circleImageView"

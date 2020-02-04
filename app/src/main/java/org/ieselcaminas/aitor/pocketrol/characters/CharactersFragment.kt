@@ -23,8 +23,11 @@ class CharactersFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_characters, container, false)
 
         //RecyclerView
-        adapter = CharacterAdapter(context!!)
         binding.chrRecyclerView.layoutManager = LinearLayoutManager(context)
+
+        adapter = CharacterAdapter(context!!, CharacterListener {chrId ->
+            viewModel.onCharacterClicked(chrId)
+        })
         binding.chrRecyclerView.adapter = adapter
         observeData()
 
