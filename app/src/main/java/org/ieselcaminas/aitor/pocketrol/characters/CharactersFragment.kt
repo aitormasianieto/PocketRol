@@ -24,17 +24,20 @@ class CharactersFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_characters, container, false)
 
         //RecyclerView
-        binding.chrRecyclerView.layoutManager = LinearLayoutManager(activity)
-
-        adapter = CharacterAdapter(CharacterListener {chrId ->
-            viewModel.onCharacterClicked(chrId)
-        })
-        binding.chrRecyclerView.adapter = adapter
+        configureRecyclerView()
 
         observeData()
         observeClicker()
 
         return binding.root
+    }
+
+    private fun configureRecyclerView() {
+        binding.chrRecyclerView.layoutManager = LinearLayoutManager(activity)
+        adapter = CharacterAdapter(CharacterListener { chrId ->
+            viewModel.onCharacterClicked(chrId)
+        })
+        binding.chrRecyclerView.adapter = adapter
     }
 
     fun observeData() {

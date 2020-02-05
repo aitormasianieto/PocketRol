@@ -17,6 +17,7 @@ class CharacterAdapter(val clickListener: CharacterListener): ListAdapter<DataIt
 
     private val adapterScope = CoroutineScope(Dispatchers.Default)
 
+    //"Configure"(Initialice?) Data
     fun addAndSubmitList(list: List<Character>) {
         adapterScope.launch {
             lateinit var items: List<DataItem.CharacterItem>
@@ -58,15 +59,24 @@ class CharacterAdapter(val clickListener: CharacterListener): ListAdapter<DataIt
 
         //binds data into each field
         fun bindView(item: Character, clickListener: CharacterListener) {
-            /*Glide.with(context).load(item.imageUrl).into((itemView.circleImageView))
-            itemView.chrName_textView.text = item.name
-            itemView.chrDesc_textView.text = item.race*/
-
             binding.character = item
             binding.clickListener = clickListener
             binding.executePendingBindings()
         }
     }
+}
+
+//Using a class thats Store DataClass
+sealed class DataItem {
+    data class CharacterItem(val character: Character): DataItem() {
+        override val id = character.chrId
+    }
+    abstract val id: Long
+}
+
+//RecyclerView Listener, opens to CharacterCardData
+class CharacterListener(val clicker: (chrId: Long) -> Unit) {
+    fun onClick(chr: Character) = clicker(chr.chrId)
 }
 
 //Internal using to differentiate
@@ -81,16 +91,5 @@ class CharacterDiffCallback: DiffUtil.ItemCallback<DataItem>() {
     }
 }
 
-//RecyclerView Listener, opens to CharacterCardData
-class CharacterListener(val clicker: (chrId: Long) -> Unit) {
-    fun onClick(chr: Character) = clicker(chr.chrId)
-}
 
-//Using a class thats Store DataClass
-sealed class DataItem {
-    data class CharacterItem(val character: Character): DataItem() {
-        override val id = character.chrId
-    }
 
-    abstract val id: Long
-}
