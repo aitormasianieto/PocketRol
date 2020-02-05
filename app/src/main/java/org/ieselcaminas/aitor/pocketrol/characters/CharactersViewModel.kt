@@ -3,23 +3,37 @@ package org.ieselcaminas.aitor.pocketrol.characters
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import org.ieselcaminas.aitor.pocketrol.database.Character
 import org.ieselcaminas.aitor.pocketrol.database.Repo
 
 
 class CharactersViewModel : ViewModel() {
 
-    //Firebase Data Charge
+    //"Firebase" Instance
     val repo = Repo()
-    fun fetchCharacterData(): LiveData<MutableList<Character>> {
-        val mutableLiveData = MutableLiveData<MutableList<Character>>()
 
+    private var viewModelJob = Job()
+    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+
+    private var chr = MutableLiveData<Character?>()
+
+    private val _characters = MutableLiveData<List<Character>>()
+    val characters: LiveData<List<Character>>
+        get() = _characters
+
+    init {
+        fetchCharactersData()
+    }
+
+    //Firebase Data Charge
+    fun fetchCharactersData() {
         //Its observing when 'Repo' has recived the data
         repo.getCharacterData().observeForever {
-            mutableLiveData.value = it
+            _characters.value = it
         }
-        return mutableLiveData
     }
 
     //ClickListener Functions

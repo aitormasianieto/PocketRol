@@ -20,5 +20,10 @@
     <fragment
         android:id="@+id/characterCardFragment"
         android:name="org.ieselcaminas.aitor.pocketrol.charactercard.CharacterCardFragment"
-        android:label="CharacterCardFragment" />
+        android:label="CharacterCardFragment" >
+        <argument
+            android:name="chrId"
+            app:argType="long"
+            android:defaultValue="1L" />
+    </fragment>
 </navigation>

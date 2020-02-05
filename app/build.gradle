@@ -2,6 +2,9 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
+//To BindingAdapter
+apply plugin: 'kotlin-kapt'
+
 //Navigation(Directions) and SafeArgs
 apply plugin: 'androidx.navigation.safeargs.kotlin'
 

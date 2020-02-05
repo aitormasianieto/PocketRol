@@ -26,7 +26,8 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             app:civ_border_width="2dp"
-            tools:background="@color/colorPrimary" />
+            tools:background="@color/colorPrimary"
+            app:chrImage="@{character.imageUrl}"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -40,7 +41,7 @@
                 android:layout_marginStart="8dp"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                android:text="Name"/>
+                android:text="@{character.name}"/>
 
             <TextView
                 android:id="@+id/chrDesc_textView"
@@ -49,7 +50,7 @@
                 android:layout_marginStart="8dp"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                android:text="Description"/>
+                android:text="@{character.race}"/>
 
         </LinearLayout>
 

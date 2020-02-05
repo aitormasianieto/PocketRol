@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.ieselcaminas.aitor.pocketrol.R
 import org.ieselcaminas.aitor.pocketrol.databinding.FragmentCharactersBinding
@@ -23,13 +24,15 @@ class CharactersFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_characters, container, false)
 
         //RecyclerView
-        binding.chrRecyclerView.layoutManager = LinearLayoutManager(context)
+        binding.chrRecyclerView.layoutManager = LinearLayoutManager(activity)
 
-        adapter = CharacterAdapter(context!!, CharacterListener {chrId ->
+        adapter = CharacterAdapter(CharacterListener {chrId ->
             viewModel.onCharacterClicked(chrId)
         })
         binding.chrRecyclerView.adapter = adapter
+
         observeData()
+        observeClicker()
 
         return binding.root
     }
@@ -37,11 +40,24 @@ class CharactersFragment : Fragment() {
     fun observeData() {
         binding.shimmerViewContainer.startShimmer() //Shimmer is a charges animation
 
-        viewModel.fetchCharacterData().observe(viewLifecycleOwner, Observer {
+        viewModel.characters.observe(viewLifecycleOwner, Observer {
             binding.shimmerViewContainer.visibility = View.GONE
             binding.shimmerViewContainer.stopShimmer()
-            adapter.setListData(it)
-            adapter.notifyDataSetChanged()
+
+            it?.let {
+                adapter.addAndSubmitList(it)
+            }
+        })
+    }
+
+    fun observeClicker() {
+        viewModel.navigateToCharacterCard.observe(viewLifecycleOwner, Observer { chr ->
+            chr?.let {
+                this.findNavController().navigate(
+                    CharactersFragmentDirections
+                        .actionCharactersFragmentToCharacterCardFragment(chr))
+                viewModel.onCharacterCardNavigated()
+            }
         })
     }
 
