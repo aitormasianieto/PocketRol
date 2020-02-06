@@ -37,11 +37,11 @@ class CharactersViewModel : ViewModel() {
     }
 
     //ClickListener Functions
-    private val _navigateToCharacterCard = MutableLiveData<Long>()
-    val navigateToCharacterCard: LiveData<Long>
+    private val _navigateToCharacterCard = MutableLiveData<String>()
+    val navigateToCharacterCard: LiveData<String>
         get() = _navigateToCharacterCard
 
-    fun onCharacterClicked(id: Long) {
+    fun onCharacterClicked(id: String) {
         _navigateToCharacterCard.value = id
     }
 

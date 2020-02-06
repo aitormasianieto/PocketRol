@@ -71,11 +71,11 @@ sealed class DataItem {
     data class CharacterItem(val character: Character): DataItem() {
         override val id = character.chrId
     }
-    abstract val id: Long
+    abstract val id: String
 }
 
 //RecyclerView Listener, opens to CharacterCardData
-class CharacterListener(val clicker: (chrId: Long) -> Unit) {
+class CharacterListener(val clicker: (characterId: String) -> Unit) {
     fun onClick(chr: Character) = clicker(chr.chrId)
 }
 

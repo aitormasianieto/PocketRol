@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
@@ -70,7 +71,10 @@ class LoginFragment : Fragment() {
             if (resultCode == Activity.RESULT_OK) {
                 // User successfully signed in
                 Log.i(TAG, "Successfully signed in user ${FirebaseAuth.getInstance().currentUser?.displayName}!")
-            } else {
+
+                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToLobbyFragment(FirebaseAuth.getInstance().currentUser?.uid!!))
+            }
+            else {
                 // Sign in failed. If response is null the user canceled the
                 // sign-in flow using the back button. Otherwise check
                 // response.getError().getErrorCode() and handle the error.

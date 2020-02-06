@@ -9,17 +9,16 @@ class Repo {
         val mutableLiveData = MutableLiveData<List<Character>>()
 
         FirebaseFirestore.getInstance().collection("characters").get().addOnSuccessListener {result ->
+
             val listData = mutableListOf<Character>()
             for (document in result) {
                 val imageUrl = document.getString("imageUrl")
                 val name = document.getString("name")
                 val race = document.getString("race")
-                //val chrId =
+                val chrId = document.id
 
-                var counter: Long = 1
-                val character = Character(counter, imageUrl!!, name!!, race!!,"bruixot")
+                val character = Character(chrId, imageUrl!!, name!!, race!!,"bruixot")
                 listData.add(character)
-                counter++
             }
             mutableLiveData.value = listData
         }
