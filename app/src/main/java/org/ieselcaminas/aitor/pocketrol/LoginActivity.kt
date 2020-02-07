@@ -1,49 +1,42 @@
-package org.ieselcaminas.aitor.pocketrol.login
-
+package org.ieselcaminas.aitor.pocketrol
 
 import android.app.Activity
-import android.content.ContentValues.TAG
+import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.fragment.findNavController
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
+import org.ieselcaminas.aitor.pocketrol.databinding.ActivityLoginBinding
 
-import org.ieselcaminas.aitor.pocketrol.R
-import org.ieselcaminas.aitor.pocketrol.databinding.FragmentLoginBinding
 
-/**
- * A simple [Fragment] subclass.
- */
-class LoginFragment : Fragment() {
+class LoginActivity() : AppCompatActivity() {
 
     val SIGN_IN_REQUEST_CODE = 1001
+    val binding: ActivityLoginBinding by lazy { DataBindingUtil.setContentView<ActivityLoginBinding>(this, R.layout.activity_login) }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val binding = DataBindingUtil.inflate<FragmentLoginBinding>(inflater, R.layout.fragment_login, container, false)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-        var logged = false
-        binding.authButton.setOnClickListener {
-            if (logged) {
-                AuthUI.getInstance().signOut(context!!)
-                logged = false
-            }
-            else {
-                launchSignInFlow()
-                logged = true
-            }
-        }
-
-        return binding.root
+        binding.authLayout.setOnClickListener { loginClick() }
     }
 
+    fun loginClick() {
+        var logged = false
+        binding.authLayout.setOnClickListener {
+            /*if (logged) {
+                AuthUI.getInstance().signOut(this)
+                logged = false
+            }
+            else {*/
+                launchSignInFlow()
+                logged = true
+            //}
+        }
+    }
     private fun launchSignInFlow() {
         // Give users the option to sign in / register with their email or Google account.
         // If users choose to register with their email, they will need to create a password as well.
@@ -70,18 +63,17 @@ class LoginFragment : Fragment() {
             val response = IdpResponse.fromResultIntent(data)
             if (resultCode == Activity.RESULT_OK) {
                 // User successfully signed in
-                Log.i(TAG, "Successfully signed in user ${FirebaseAuth.getInstance().currentUser?.displayName}!")
+                Log.i(ContentValues.TAG, "Successfully signed in user ${FirebaseAuth.getInstance().currentUser?.displayName}!")
 
-                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToLobbyFragment(FirebaseAuth.getInstance().currentUser?.uid!!))
+                startActivity((Intent(this, MainActivity::class.java).putExtra("userUID", FirebaseAuth.getInstance().currentUser?.uid)))
             }
             else {
                 // Sign in failed. If response is null the user canceled the
                 // sign-in flow using the back button. Otherwise check
                 // response.getError().getErrorCode() and handle the error.
-                Log.i(TAG, "Sign in unsuccessful ${response?.error?.errorCode}")
+                Log.i(ContentValues.TAG, "Sign in unsuccessful ${response?.error?.errorCode}")
             }
         }
     }
-
-
 }
+

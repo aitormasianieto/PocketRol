@@ -3,17 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/loginFragment">
-    <fragment
-        android:id="@+id/loginFragment"
-        android:name="org.ieselcaminas.aitor.pocketrol.login.LoginFragment"
-        android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
-        <action
-            android:id="@+id/action_loginFragment_to_lobbyFragment"
-            app:destination="@id/lobbyFragment"
-            app:popUpTo="@+id/navigation" />
-    </fragment>
+    app:startDestination="@id/lobbyFragment">
     <fragment
         android:id="@+id/charactersFragment"
         android:name="org.ieselcaminas.aitor.pocketrol.characters.CharactersFragment"
@@ -34,9 +24,6 @@
         android:id="@+id/lobbyFragment"
         android:name="org.ieselcaminas.aitor.pocketrol.lobby.LobbyFragment"
         android:label="LobbyFragment" >
-        <action
-            android:id="@+id/action_lobbyFragment_to_charactersFragment"
-            app:destination="@id/charactersFragment" />
         <argument
             android:name="userUID"
             app:argType="string" />

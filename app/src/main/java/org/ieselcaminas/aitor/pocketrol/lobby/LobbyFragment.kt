@@ -23,8 +23,6 @@ class LobbyFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_lobby, container, false)
 
 
-
-
         return binding.root
     }
 
