@@ -25,7 +25,7 @@ class LoginActivity() : AppCompatActivity() {
     }
 
     fun loginClick() {
-        var logged = false
+        //var logged = false
         binding.authLayout.setOnClickListener {
             /*if (logged) {
                 AuthUI.getInstance().signOut(this)
@@ -33,7 +33,7 @@ class LoginActivity() : AppCompatActivity() {
             }
             else {*/
                 launchSignInFlow()
-                logged = true
+                //logged = true
             //}
         }
     }
@@ -65,7 +65,7 @@ class LoginActivity() : AppCompatActivity() {
                 // User successfully signed in
                 Log.i(ContentValues.TAG, "Successfully signed in user ${FirebaseAuth.getInstance().currentUser?.displayName}!")
 
-                startActivity((Intent(this, MainActivity::class.java).putExtra("userUID", FirebaseAuth.getInstance().currentUser?.uid)))
+                startActivity(Intent(this, MainActivity::class.java))
             }
             else {
                 // Sign in failed. If response is null the user canceled the
