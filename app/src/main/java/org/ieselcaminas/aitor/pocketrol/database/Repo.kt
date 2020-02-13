@@ -1,17 +1,13 @@
 package org.ieselcaminas.aitor.pocketrol.database
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.google.android.gms.tasks.OnFailureListener
-import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 
-class Repo {
+class Repo { /**Es mejor que cada uno acceda a su Repo o mejor hago un singleton para que haya un unico Repo????*/
 
     private val INSTANCE = FirebaseFirestore.getInstance()
-    private val userUid by lazy { FirebaseAuth.getInstance().currentUser?.uid ?: "admin" }
+    private val userUid by lazy { FirebaseAuth.getInstance().currentUser?.uid ?: "errorNotUserUID" }
 
     /*fun getUserUid(): String {
         synchronized(String::class.java) {
@@ -25,8 +21,6 @@ class Repo {
     fun getCharacterData(): MutableLiveData<List<Character>> {
         val mutableLiveData = MutableLiveData<List<Character>>()
 
-        checkUserExistence()
-
         INSTANCE.collection("users").document(userUid).collection("characters").get().addOnSuccessListener { result ->
 
             val listData = mutableListOf<Character>()
@@ -36,7 +30,7 @@ class Repo {
                 val race = document.getString("race")
                 val chrId = document.id
 
-                val character = Character(chrId, imageUrl!!, name!!, race!!,"bruixot")
+                val character = Character(chrId, imageUrl!!, name!!, race!!)
                 listData.add(character)
             }
             mutableLiveData.value = listData
@@ -49,23 +43,15 @@ class Repo {
             createUserFirebase()
         }
     }
-
     fun isUserInFirebase(): Boolean {
         var b = false
 
-        INSTANCE.collection("users").get().addOnSuccessListener { result ->
+        INSTANCE.collection("users").document(userUid).get().addOnSuccessListener { b = true }
 
-            for (document in result) {
-                if (document.id == userUid) {
-                    b = true
-                }
-            }
-        }
         return b
     }
-
     fun createUserFirebase() {
-        var data: Map<String, String> = mapOf(Pair("name", FirebaseAuth.getInstance().currentUser?.displayName ?: "user"))
+        val data: Map<String, String> = mapOf(Pair("name", FirebaseAuth.getInstance().currentUser?.displayName ?: "errorNotUserName"))
 
         INSTANCE.collection("users")
             .document(userUid).set(data)

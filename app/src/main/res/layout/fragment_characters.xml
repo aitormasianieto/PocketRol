@@ -4,20 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="fragment"
+            type="org.ieselcaminas.aitor.pocketrol.characters.CharactersFragment" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/characters_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="15dp"
+            android:clickable="true"
+            app:srcCompat="@android:drawable/ic_menu_add"
+            android:focusable="true"/>
+
         <com.facebook.shimmer.ShimmerFrameLayout
             android:id="@+id/shimmer_view_container"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -25,22 +37,24 @@
                 android:orientation="vertical">
 
                 <include layout="@layout/item_character_load" />
+
                 <include layout="@layout/item_character_load" />
+
                 <include layout="@layout/item_character_load" />
+
                 <include layout="@layout/item_character_load" />
 
             </LinearLayout>
         </com.facebook.shimmer.ShimmerFrameLayout>
 
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/chr_recyclerView"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </FrameLayout>
+
+
 </layout>

@@ -12,7 +12,8 @@ import org.ieselcaminas.aitor.pocketrol.database.Repo
 
 class CharactersViewModel : ViewModel() {
 
-    //"Firebase" Instance
+    //"Firebase"
+    // Instance
     val repo = Repo()
 
     private var viewModelJob = Job()
@@ -36,7 +37,7 @@ class CharactersViewModel : ViewModel() {
         }
     }
 
-    //ClickListener Functions
+    //Character ClickListener Functions
     private val _navigateToCharacterCard = MutableLiveData<String>()
     val navigateToCharacterCard: LiveData<String>
         get() = _navigateToCharacterCard
@@ -44,7 +45,6 @@ class CharactersViewModel : ViewModel() {
     fun onCharacterClicked(id: String) {
         _navigateToCharacterCard.value = id
     }
-
     fun onCharacterCardNavigated() {
         _navigateToCharacterCard.value = null
     }

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/charactersFragment">
+    app:startDestination="@id/lobbyFragment">
     <fragment
         android:id="@+id/charactersFragment"
         android:name="org.ieselcaminas.aitor.pocketrol.characters.CharactersFragment"
@@ -11,6 +11,9 @@
         <action
             android:id="@+id/action_charactersFragment_to_characterCardFragment"
             app:destination="@id/characterCardFragment" />
+        <action
+            android:id="@+id/action_charactersFragment_to_characterCreationFragment"
+            app:destination="@id/characterCreationFragment" />
     </fragment>
     <fragment
         android:id="@+id/characterCardFragment"
@@ -27,5 +30,13 @@
         <argument
             android:name="userUID"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/characterCreationFragment"
+        android:name="org.ieselcaminas.aitor.pocketrol.charactercreation.CharacterCreationFragment"
+        android:label="CharacterCreationFragment" >
+        <action
+            android:id="@+id/action_characterCreationFragment_to_charactersFragment"
+            app:destination="@id/charactersFragment" />
     </fragment>
 </navigation>

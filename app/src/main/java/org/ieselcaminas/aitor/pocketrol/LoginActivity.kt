@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
+import org.ieselcaminas.aitor.pocketrol.database.Repo
 import org.ieselcaminas.aitor.pocketrol.databinding.ActivityLoginBinding
 
 
@@ -25,16 +26,9 @@ class LoginActivity() : AppCompatActivity() {
     }
 
     fun loginClick() {
-        //var logged = false
         binding.authLayout.setOnClickListener {
-            /*if (logged) {
-                AuthUI.getInstance().signOut(this)
-                logged = false
-            }
-            else {*/
-                launchSignInFlow()
-                //logged = true
-            //}
+            //AuthUI.getInstance().signOut(this)
+            launchSignInFlow()
         }
     }
     private fun launchSignInFlow() {
@@ -47,8 +41,7 @@ class LoginActivity() : AppCompatActivity() {
         )
 
         // Create and launch sign-in intent.
-        // We listen to the response of this activity with the
-        // SIGN_IN_REQUEST_CODE
+        // We listen to the response of this activity with the SIGN_IN_REQUEST_CODE
         startActivityForResult(
             AuthUI.getInstance()
                 .createSignInIntentBuilder()
@@ -65,12 +58,14 @@ class LoginActivity() : AppCompatActivity() {
                 // User successfully signed in
                 Log.i(ContentValues.TAG, "Successfully signed in user ${FirebaseAuth.getInstance().currentUser?.displayName}!")
 
+                val repo = Repo()
+                repo.checkUserExistence()
                 startActivity(Intent(this, MainActivity::class.java))
             }
             else {
-                // Sign in failed. If response is null the user canceled the
-                // sign-in flow using the back button. Otherwise check
-                // response.getError().getErrorCode() and handle the error.
+                /* Sign in failed.
+                 * If response is null the user canceled the sign-in flow using the back button.
+                 * Otherwise check response.getError().getErrorCode() and handle the error.*/
                 Log.i(ContentValues.TAG, "Sign in unsuccessful ${response?.error?.errorCode}")
             }
         }

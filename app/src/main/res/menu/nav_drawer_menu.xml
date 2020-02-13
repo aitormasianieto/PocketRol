@@ -3,5 +3,14 @@
 
     <item
         android:id="@+id/lobbyFragment"
-        android:title="Item" />
+        android:title="Lobby" />
+    <item
+        android:id="@+id/charactersFragment"
+        android:title="Characters" />
+    <item
+        android:id="@+id/campaignsFragment"
+        android:title="Campaigns" />
+    <item
+        android:id="@+id/friendsFragment"
+        android:title="Friends" />
 </menu>

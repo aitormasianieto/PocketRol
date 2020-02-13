@@ -1,7 +1,6 @@
 package org.ieselcaminas.aitor.pocketrol.characters
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -27,8 +26,14 @@ class CharactersFragment : Fragment() {
         //RecyclerView
         configureRecyclerView()
 
+        //Observers
         observeData()
-        observeClicker()
+        observeCharacterClicker()
+
+        //Fab
+        binding.charactersFab.setOnClickListener {
+            newCharacter()
+        }
 
         return binding.root
     }
@@ -54,15 +59,21 @@ class CharactersFragment : Fragment() {
         })
     }
 
-    fun observeClicker() {
+    fun observeCharacterClicker() {
         viewModel.navigateToCharacterCard.observe(viewLifecycleOwner, Observer { chr ->
             chr?.let {
                 this.findNavController().navigate(
-                    CharactersFragmentDirections
-                        .actionCharactersFragmentToCharacterCardFragment(chr))
+                    CharactersFragmentDirections.actionCharactersFragmentToCharacterCardFragment(chr)
+                )
                 viewModel.onCharacterCardNavigated()
             }
         })
+    }
+
+    fun newCharacter() {
+        this.findNavController().navigate(
+            CharactersFragmentDirections.actionCharactersFragmentToCharacterCreationFragment()
+        )
     }
 
 }
