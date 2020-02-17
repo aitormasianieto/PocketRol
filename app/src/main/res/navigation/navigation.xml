@@ -20,8 +20,8 @@
         android:name="org.ieselcaminas.aitor.pocketrol.charactercard.CharacterCardFragment"
         android:label="CharacterCardFragment" >
         <argument
-            android:name="chrId"
-            app:argType="string" />
+            android:name="chr"
+            app:argType="org.ieselcaminas.aitor.pocketrol.database.Character" />
     </fragment>
     <fragment
         android:id="@+id/lobbyFragment"

@@ -25,6 +25,8 @@ class MainActivity : AppCompatActivity() {
         NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout)
         NavigationUI.setupWithNavController(binding.navView, navController)
 
+        //getSupportActionBar()!!.set
+
         //TODO Send userUID to Fragment
         //intent.getStringExtra("userUID")
     }

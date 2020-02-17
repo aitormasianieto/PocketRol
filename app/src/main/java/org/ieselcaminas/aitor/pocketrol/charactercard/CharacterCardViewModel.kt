@@ -1,7 +1,9 @@
 package org.ieselcaminas.aitor.pocketrol.charactercard
 
 import androidx.lifecycle.ViewModel
+import org.ieselcaminas.aitor.pocketrol.database.Character
 
-class CharacterCardViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
+class CharacterCardViewModel(val character: Character) : ViewModel() {
+
+
 }

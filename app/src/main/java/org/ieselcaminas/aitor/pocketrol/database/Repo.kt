@@ -2,11 +2,12 @@ package org.ieselcaminas.aitor.pocketrol.database
 
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.FirebaseFirestore
 
-class Repo { /**Es mejor que cada uno acceda a su Repo o mejor hago un singleton para que haya un unico Repo????*/
+class Repo {
 
-    private val INSTANCE = FirebaseFirestore.getInstance()
+    private val firebaseFirestoreInstance = FirebaseFirestore.getInstance()
     private val userUid by lazy { FirebaseAuth.getInstance().currentUser?.uid ?: "errorNotUserUID" }
 
     /*fun getUserUid(): String {
@@ -20,23 +21,53 @@ class Repo { /**Es mejor que cada uno acceda a su Repo o mejor hago un singleton
 
     fun getCharacterData(): MutableLiveData<List<Character>> {
         val mutableLiveData = MutableLiveData<List<Character>>()
+        val listData = mutableListOf<Character>()
 
-        INSTANCE.collection("users").document(userUid).collection("characters").get().addOnSuccessListener { result ->
+        firebaseFirestoreInstance.collection("users").document(userUid).collection("characters").addSnapshotListener { snapshots, ffe ->
+            for (dC in snapshots!!.documentChanges) {
+                val doc = dC.document
+                when (dC.type) {
+                    DocumentChange.Type.ADDED -> {
+                        val chrId = doc.id
+                        val imageUrl = doc.getString("imageUrl")
+                        val name = doc.getString("name")
+                        val race = doc.getString("race")
 
-            val listData = mutableListOf<Character>()
-            for (document in result) {
-                val imageUrl = document.getString("imageUrl")
-                val name = document.getString("name")
-                val race = document.getString("race")
-                val chrId = document.id
+                        listData.add(
+                            Character(
+                                chrId,
+                                imageUrl!!,
+                                name!!,
+                                race!!
+                            )
+                        )
+                    }
+                    DocumentChange.Type.MODIFIED -> {
+                        val chrId = doc.id
+                        val imageUrl = doc.getString("imageUrl")
+                        val name = doc.getString("name")
+                        val race = doc.getString("race")
 
-                val character = Character(chrId, imageUrl!!, name!!, race!!)
-                listData.add(character)
+                        val index = listData.indexOf(listData.find { it.chrId == doc.id })
+                        listData[index] = Character(
+                            chrId,
+                            imageUrl!!,
+                            name!!,
+                            race!!
+                        )
+                    }
+                    DocumentChange.Type.REMOVED -> {
+                        listData.removeAt(listData.indexOf(listData.find { it.chrId == doc.id }))
+                    }
+                }
+
             }
             mutableLiveData.value = listData
         }
         return mutableLiveData
     }
+
+
 
     fun checkUserExistence() {
         if (!isUserInFirebase()) {
@@ -46,14 +77,14 @@ class Repo { /**Es mejor que cada uno acceda a su Repo o mejor hago un singleton
     fun isUserInFirebase(): Boolean {
         var b = false
 
-        INSTANCE.collection("users").document(userUid).get().addOnSuccessListener { b = true }
+        firebaseFirestoreInstance.collection("users").document(userUid).get().addOnSuccessListener { b = true }
 
         return b
     }
     fun createUserFirebase() {
         val data: Map<String, String> = mapOf(Pair("name", FirebaseAuth.getInstance().currentUser?.displayName ?: "errorNotUserName"))
 
-        INSTANCE.collection("users")
+        firebaseFirestoreInstance.collection("users")
             .document(userUid).set(data)
     }
 }

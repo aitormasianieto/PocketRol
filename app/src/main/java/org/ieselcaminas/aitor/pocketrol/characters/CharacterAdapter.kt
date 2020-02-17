@@ -1,6 +1,7 @@
 package org.ieselcaminas.aitor.pocketrol.characters
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -28,10 +29,15 @@ class CharacterAdapter(val clickListener: CharacterListener): ListAdapter<DataIt
                 }
             }
             withContext(Dispatchers.Main) {
+                Log.i("Adapter", "submitedList")
                 submitList(items)
             }
         }
     }
+
+    /*override fun submitList(list: List<DataItem>?) {
+        super.submitList(list?.let { ArrayList(it) })
+    }*/
 
     //Holder "Constructor"
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
@@ -67,7 +73,7 @@ class CharacterAdapter(val clickListener: CharacterListener): ListAdapter<DataIt
 }
 
 //Using a class thats Store DataClass
-sealed class DataItem {
+sealed class DataItem {             /**Is this NECESARIO???????????????????????????????????*/
     data class CharacterItem(val character: Character): DataItem() {
         override val id = character.chrId
     }
@@ -75,8 +81,8 @@ sealed class DataItem {
 }
 
 //RecyclerView Listener, opens to CharacterCardData
-class CharacterListener(val clicker: (characterId: String) -> Unit) {
-    fun onClick(chr: Character) = clicker(chr.chrId)
+class CharacterListener(val clicker: (character: Character) -> Unit) {
+    fun onClick(chr: Character) = clicker(chr)
 }
 
 //Internal using to differentiate

@@ -1,5 +1,6 @@
 package org.ieselcaminas.aitor.pocketrol.characters
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -37,13 +38,13 @@ class CharactersViewModel : ViewModel() {
         }
     }
 
-    //Character ClickListener Functions
-    private val _navigateToCharacterCard = MutableLiveData<String>()
-    val navigateToCharacterCard: LiveData<String>
+    //Character ClickListener Functions (Adapter)
+    private val _navigateToCharacterCard = MutableLiveData<Character>()
+    val navigateToCharacterCard: LiveData<Character>
         get() = _navigateToCharacterCard
 
-    fun onCharacterClicked(id: String) {
-        _navigateToCharacterCard.value = id
+    fun onCharacterClicked(chr: Character) {
+        _navigateToCharacterCard.value = chr
     }
     fun onCharacterCardNavigated() {
         _navigateToCharacterCard.value = null

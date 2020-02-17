@@ -40,8 +40,8 @@ class CharactersFragment : Fragment() {
 
     private fun configureRecyclerView() {
         binding.chrRecyclerView.layoutManager = LinearLayoutManager(activity)
-        adapter = CharacterAdapter(CharacterListener { chrId ->
-            viewModel.onCharacterClicked(chrId)
+        adapter = CharacterAdapter(CharacterListener { chr ->
+            viewModel.onCharacterClicked(chr)
         })
         binding.chrRecyclerView.adapter = adapter
     }
