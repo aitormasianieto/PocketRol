@@ -12,31 +12,37 @@ import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
 import org.ieselcaminas.aitor.pocketrol.database.Repo
 import org.ieselcaminas.aitor.pocketrol.databinding.ActivityLoginBinding
+import kotlin.Exception
 
 
-class LoginActivity() : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
 
     val SIGN_IN_REQUEST_CODE = 1001
     val binding: ActivityLoginBinding by lazy { DataBindingUtil.setContentView<ActivityLoginBinding>(this, R.layout.activity_login) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.LoginTheme) //Changes Theme
 
         binding.authLayout.setOnClickListener { loginClick() }
     }
 
     fun loginClick() {
         binding.authLayout.setOnClickListener {
-            //AuthUI.getInstance().signOut(this)
-            launchSignInFlow()
+//            try {
+                launchSignInFlow()
+//            }
+//            catch (ex: Exception) {
+//                Log.w("LoginActivity", "The user canceled their login")
+//            }
         }
     }
     private fun launchSignInFlow() {
         // Give users the option to sign in / register with their email or Google account.
         // If users choose to register with their email, they will need to create a password as well.
         val providers = arrayListOf(
-            AuthUI.IdpConfig.EmailBuilder().build(),
-            AuthUI.IdpConfig.GoogleBuilder().build()
+            AuthUI.IdpConfig.GoogleBuilder().build(),
+            AuthUI.IdpConfig.EmailBuilder().build()
             // This is where you can provide more ways for users to register and sign in.
         )
 
@@ -46,6 +52,7 @@ class LoginActivity() : AppCompatActivity() {
             AuthUI.getInstance()
                 .createSignInIntentBuilder()
                 .setAvailableProviders(providers)
+                .setTheme(R.style.NewLoginAuthTheme) //Puts custom theme
                 .build(),
             SIGN_IN_REQUEST_CODE
         )
@@ -61,6 +68,7 @@ class LoginActivity() : AppCompatActivity() {
                 val repo = Repo()
                 repo.checkUserExistence()
                 startActivity(Intent(this, MainActivity::class.java))
+                finish() //I want to prevent back to this activity
             }
             else {
                 /* Sign in failed.

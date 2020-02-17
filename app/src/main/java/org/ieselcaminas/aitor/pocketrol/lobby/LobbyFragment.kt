@@ -40,6 +40,7 @@ class LobbyFragment : Fragment() {
             R.id.logOut_menuItem -> {
                 AuthUI.getInstance().signOut(context!!)
                 startActivity(Intent(context, LoginActivity::class.java))
+                activity!!.finish() //I want to prevent back to this activity
                 true
             }
             else -> {

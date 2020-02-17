@@ -1,5 +1,6 @@
 package org.ieselcaminas.aitor.pocketrol.characters
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -33,6 +34,7 @@ class CharactersViewModel : ViewModel() {
     fun fetchCharactersData() {
         //Its observing when 'Repo' has recived the data
         repo.getCharacterData().observeForever {
+            Log.i("Adapter2", it.toString())
             _characters.value = it
         }
     }

@@ -1,6 +1,7 @@
 package org.ieselcaminas.aitor.pocketrol.characters
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -28,10 +29,15 @@ class CharacterAdapter(val clickListener: CharacterListener): ListAdapter<DataIt
                 }
             }
             withContext(Dispatchers.Main) {
+                Log.i("Adapter", "submitedList")
                 submitList(items)
             }
         }
     }
+
+    /*override fun submitList(list: List<DataItem>?) {
+        super.submitList(list?.let { ArrayList(it) })
+    }*/
 
     //Holder "Constructor"
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
