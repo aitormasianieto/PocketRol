@@ -34,6 +34,7 @@ class CharactersViewModel : ViewModel() {
     fun fetchCharactersData() {
         //Its observing when 'Repo' has recived the data
         repo.getCharacterData().observeForever {
+            Log.i("Adapter2", it.toString())
             _characters.value = it
         }
     }
