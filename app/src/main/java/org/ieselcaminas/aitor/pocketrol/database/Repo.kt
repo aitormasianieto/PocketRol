@@ -57,7 +57,7 @@ class Repo {
                         )
                     }
                     DocumentChange.Type.REMOVED -> {
-                        listData.removeAt(listData.indexOf(listData.find { it.chrId == doc.id }))
+                        listData.removeAt(listData.indexOf(listData.find { it.chrId == doc.id  }))
                     }
                 }
 
