@@ -5,6 +5,7 @@ import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.firebase.ui.auth.AuthUI
@@ -16,6 +17,8 @@ import kotlin.Exception
 
 
 class LoginActivity : AppCompatActivity() {
+
+    val TAG = "LoginActivity"
 
     val SIGN_IN_REQUEST_CODE = 1001
     val binding: ActivityLoginBinding by lazy { DataBindingUtil.setContentView<ActivityLoginBinding>(this, R.layout.activity_login) }
@@ -29,12 +32,7 @@ class LoginActivity : AppCompatActivity() {
 
     fun loginClick() {
         binding.authLayout.setOnClickListener {
-//            try {
                 launchSignInFlow()
-//            }
-//            catch (ex: Exception) {
-//                Log.w("LoginActivity", "The user canceled their login")
-//            }
         }
     }
     private fun launchSignInFlow() {
@@ -77,6 +75,8 @@ class LoginActivity : AppCompatActivity() {
                 Log.i(ContentValues.TAG, "Sign in unsuccessful ${response?.error?.errorCode}")
             }
         }
+
+
     }
 }
 

@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.ieselcaminas.aitor.pocketrol.R
@@ -17,7 +17,7 @@ class CharactersFragment : Fragment() {
 
     private lateinit var binding: FragmentCharactersBinding
     private lateinit var adapter: CharacterAdapter
-    private val viewModel by lazy { ViewModelProviders.of(this).get(CharactersViewModel::class.java) }
+    private val viewModel by lazy { ViewModelProvider(this).get(CharactersViewModel::class.java) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Get a reference to the binding object and inflate the fragment views.
@@ -53,9 +53,9 @@ class CharactersFragment : Fragment() {
             binding.shimmerViewContainer.visibility = View.GONE
             binding.shimmerViewContainer.stopShimmer()
 
-            it?.let {
+            //it?.let {
                 adapter.addAndSubmitList(it)
-            }
+           //}
         })
     }
 

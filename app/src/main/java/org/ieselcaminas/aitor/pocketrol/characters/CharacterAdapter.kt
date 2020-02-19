@@ -23,17 +23,16 @@ class CharacterAdapter(val clickListener: CharacterListener): ListAdapter<DataIt
         adapterScope.launch {
             lateinit var items: List<DataItem.CharacterItem>
 
-            list.let {
+            //list.let {
                 items = list.map {
                     DataItem.CharacterItem(it)
                 }
-            }
+            //}
             withContext(Dispatchers.Main) {
                 submitList(items)
             }
         }
     }
-
 
     //Holder "Constructor"
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
@@ -69,7 +68,7 @@ class CharacterAdapter(val clickListener: CharacterListener): ListAdapter<DataIt
 }
 
 //Using a class thats Store DataClass
-sealed class DataItem {             /**Is this NECESARIO???????????????????????????????????*/
+sealed class DataItem {                                     /**Is this NECESARIO???????????????????????????????????*/
     data class CharacterItem(val character: Character): DataItem() {
         override val id = character.chrId
     }

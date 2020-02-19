@@ -7,9 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import org.ieselcaminas.aitor.pocketrol.R
-import org.ieselcaminas.aitor.pocketrol.characters.CharactersViewModel
 import org.ieselcaminas.aitor.pocketrol.databinding.FragmentCharacterCardBinding
 
 

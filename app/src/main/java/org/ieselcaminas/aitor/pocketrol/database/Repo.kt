@@ -26,6 +26,7 @@ class Repo {
         firebaseFirestoreInstance.collection("users").document(userUid).collection("characters").addSnapshotListener { snapshots, ffe ->
             for (dC in snapshots!!.documentChanges) {
                 val doc = dC.document
+
                 when (dC.type) {
                     DocumentChange.Type.ADDED -> {
                         val chrId = doc.id

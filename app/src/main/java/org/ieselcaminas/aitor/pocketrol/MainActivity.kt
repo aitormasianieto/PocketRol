@@ -2,9 +2,6 @@ package org.ieselcaminas.aitor.pocketrol
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toolbar
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
@@ -24,11 +21,6 @@ class MainActivity : AppCompatActivity() {
 
         NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout)
         NavigationUI.setupWithNavController(binding.navView, navController)
-
-        //getSupportActionBar()!!.set
-
-        //TODO Send userUID to Fragment
-        //intent.getStringExtra("userUID")
     }
 
     override fun onSupportNavigateUp(): Boolean {
