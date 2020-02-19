@@ -79,6 +79,6 @@ dependencies {
     //NavigationDrawer
     implementation 'com.google.android.material:material:1.1.0'
 
-    //Smart Lock for Passwords
+    //Smart Lock for Passwords NO SE USA(DE MOMENTO)
     implementation 'com.google.android.gms:play-services-auth:17.0.0'
 }
