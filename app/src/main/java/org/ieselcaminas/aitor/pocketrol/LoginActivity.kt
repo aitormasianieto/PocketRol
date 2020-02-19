@@ -30,11 +30,22 @@ class LoginActivity : AppCompatActivity() {
         binding.authLayout.setOnClickListener { loginClick() }
     }
 
-    fun loginClick() {
-        binding.authLayout.setOnClickListener {
-                launchSignInFlow()
+    private fun loginClick() {
+        if (FirebaseAuth.getInstance().currentUser == null) {
+            launchSignInFlow()
+        }
+        else {
+            logIn()
         }
     }
+
+    private fun logIn() {
+        val repo = Repo()
+        repo.checkUserExistence()
+        startActivity(Intent(this, MainActivity::class.java))
+        finish() //I want to prevent back to this activity
+    }
+
     private fun launchSignInFlow() {
         // Give users the option to sign in / register with their email or Google account.
         // If users choose to register with their email, they will need to create a password as well.
@@ -63,10 +74,7 @@ class LoginActivity : AppCompatActivity() {
                 // User successfully signed in
                 Log.i(ContentValues.TAG, "Successfully signed in user ${FirebaseAuth.getInstance().currentUser?.displayName}!")
 
-                val repo = Repo()
-                repo.checkUserExistence()
-                startActivity(Intent(this, MainActivity::class.java))
-                finish() //I want to prevent back to this activity
+                logIn()
             }
             else {
                 /* Sign in failed.

@@ -14,18 +14,18 @@ import kotlinx.coroutines.withContext
 import org.ieselcaminas.aitor.pocketrol.database.Character
 import org.ieselcaminas.aitor.pocketrol.databinding.ItemCharacterBinding
 
-class CharacterAdapter(val clickListener: CharacterListener): ListAdapter<DataItem, RecyclerView.ViewHolder>(CharacterDiffCallback()) {
+class CharacterAdapter(val clickListener: CharacterListener): ListAdapter<Character, RecyclerView.ViewHolder>(CharacterDiffCallback()) {
 
     private val adapterScope = CoroutineScope(Dispatchers.Default)
 
     //"Configure"(Initialice?) Data
     fun addAndSubmitList(list: List<Character>) {
         adapterScope.launch {
-            lateinit var items: List<DataItem.CharacterItem>
+            lateinit var items: List<Character>
 
             //list.let {
                 items = list.map {
-                    DataItem.CharacterItem(it)
+                    it
                 }
             //}
             withContext(Dispatchers.Main) {
@@ -43,8 +43,8 @@ class CharacterAdapter(val clickListener: CharacterListener): ListAdapter<DataIt
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is ItemViewHolder -> {
-                val chrItem = getItem(position) as DataItem.CharacterItem
-                holder.bindView(chrItem.character, clickListener)
+                val chr = getItem(position) as Character
+                holder.bindView(chr, clickListener)
             }
         }
     }
@@ -67,27 +67,19 @@ class CharacterAdapter(val clickListener: CharacterListener): ListAdapter<DataIt
     }
 }
 
-//Using a class thats Store DataClass
-sealed class DataItem {                                     /**Is this NECESARIO???????????????????????????????????*/
-    data class CharacterItem(val character: Character): DataItem() {
-        override val id = character.chrId
-    }
-    abstract val id: String
-}
-
 //RecyclerView Listener, opens to CharacterCardData
 class CharacterListener(val clicker: (character: Character) -> Unit) {
     fun onClick(chr: Character) = clicker(chr)
 }
 
 //Internal using to differentiate
-class CharacterDiffCallback: DiffUtil.ItemCallback<DataItem>() {
-    override fun areItemsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
-        return oldItem.id == newItem.id
+class CharacterDiffCallback: DiffUtil.ItemCallback<Character>() {
+    override fun areItemsTheSame(oldItem: Character, newItem: Character): Boolean {
+        return oldItem.chrId == newItem.chrId
     }
 
     @SuppressLint("DiffUtilEquals")
-    override fun areContentsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
+    override fun areContentsTheSame(oldItem: Character, newItem: Character): Boolean {
         return oldItem == newItem
     }
 }
