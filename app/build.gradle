@@ -21,6 +21,17 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    //I had problems w/ BindingsAdapter '.UtoUri'
+        compileOptions {
+            sourceCompatibility = 1.8
+            targetCompatibility = 1.8
+        }
+        kotlinOptions {
+            jvmTarget = "1.8"
+        }
+    //---
+        
     }
     buildTypes {
         release {
@@ -44,7 +55,7 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     // Android KTX
-    implementation 'androidx.core:core-ktx:1.1.0'
+    implementation 'androidx.core:core-ktx:1.2.0'
 
     // Navigation
     implementation "android.arch.navigation:navigation-fragment-ktx:1.0.0"
@@ -60,8 +71,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     //Firebase
-    implementation 'com.google.firebase:firebase-firestore:21.3.1'
-    implementation 'com.google.firebase:firebase-database:19.2.0'
+    implementation 'com.google.firebase:firebase-firestore:21.4.0'
+    implementation 'com.google.firebase:firebase-database:19.2.1'
     implementation 'com.google.firebase:firebase-auth:19.2.0'
     implementation 'com.firebaseui:firebase-ui-auth:5.0.0'
 
@@ -78,7 +89,4 @@ dependencies {
 
     //NavigationDrawer
     implementation 'com.google.android.material:material:1.1.0'
-
-    //Smart Lock for Passwords NO SE USA(DE MOMENTO)
-    implementation 'com.google.android.gms:play-services-auth:17.0.0'
 }
