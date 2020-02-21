@@ -16,7 +16,7 @@ android {
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "org.ieselcaminas.aitor.pocketrol"
-        minSdkVersion 21
+        minSdkVersion 23
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -87,6 +87,6 @@ dependencies {
     //Shimmer
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
 
-    //NavigationDrawer
-    implementation 'com.google.android.material:material:1.1.0'
+    //NavigationDrawer and Other things
+    implementation 'com.google.android.material:material:1.0.0'
 }

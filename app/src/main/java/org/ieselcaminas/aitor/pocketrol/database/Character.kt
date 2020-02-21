@@ -8,9 +8,9 @@ data class Character(
     val chrId: String,
     val imageUrl: String,
     val name: String,
-    val race: String = "Human",
-    val clas: String = "Paladin",
-    val level: Int = 0,
+    val race: String = "",
+    val clas: String = "",
+    val level: Int = 1,
     val inventory: List<String> = listOf(),
     val spellBook: List<String> = listOf()
 ) : Parcelable

@@ -32,7 +32,7 @@
                 android:layout_marginStart="8dp"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                android:text="Name"
+                android:text="@string/shimer_name_size"
                 android:textColor="@color/placeHolder_bg"
                 android:background="@color/placeHolder_bg"
                 tools:background="@color/placeHolder_bg"/>
@@ -44,7 +44,7 @@
                 android:layout_marginStart="8dp"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                android:text="Description"
+                android:text="@string/shimer_description_size"
                 android:textColor="@color/placeHolder_bg"
                 android:background="@color/placeHolder_bg"
                 tools:background="@color/placeHolder_bg"/>
