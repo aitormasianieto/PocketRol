@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "30461313252-fgjuc2n9ecb2tbmsg35i7mfkh6sq65m3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.ieselcaminas.aitor.pocketrol",
+            "certificate_hash": "99206f19cc254590f0f6906f5aeee9d456b78200"
+          }
+        },
+        {
           "client_id": "30461313252-pe3nm8g4o99eufsqpk2n85k3j71fum9b.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
