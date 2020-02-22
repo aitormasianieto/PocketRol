@@ -8,5 +8,7 @@
     <string name="shimer_description_size">Description</string>
     <string name="name_hint_creationCharacter">Name</string>
     <string name="image_hint_creationCharacter">Image Url</string>
+    <string name="raceLabelText">Race :</string>
+    <string name="classLabelText">Class :</string>
 
 </resources>

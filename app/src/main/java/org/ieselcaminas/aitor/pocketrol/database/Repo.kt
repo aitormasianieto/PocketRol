@@ -1,9 +1,11 @@
 package org.ieselcaminas.aitor.pocketrol.database
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 
 class Repo {
 
@@ -68,6 +70,24 @@ class Repo {
         return mutableLiveData
     }
 
+    fun getRacesOrClases(what: String): MutableLiveData<MutableList<RaceOrClas>> {
+        val mutableLiveData: MutableLiveData<MutableList<RaceOrClas>> = MutableLiveData()
+        val list: MutableList<RaceOrClas> = ArrayList()
+
+        firebaseFirestoreInstance.collection(what).orderBy("name", Query.Direction.ASCENDING).get().addOnSuccessListener { things ->
+            for (t in things) {
+                list.add(
+                    RaceOrClas(
+                        t.getString("imageUrl")!!,
+                        t.getString("name")!!
+                    )
+                )
+            }
+            mutableLiveData.value = list
+        }
+
+        return mutableLiveData
+    }
 
 
     fun checkUserExistence() {

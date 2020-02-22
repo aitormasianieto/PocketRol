@@ -16,6 +16,7 @@ class CharacterCardFragment : Fragment() {
     private val character by lazy { CharacterCardFragmentArgs.fromBundle(arguments!!).chr }
     private val viewModelFactory by lazy { CharacterCardViewModelFactory(character) }
     private val viewModel by lazy { ViewModelProvider(this, viewModelFactory).get(CharacterCardViewModel::class.java) }
+    //This could be done easier, but I was trying things
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Get a reference to the binding object and inflate the fragment views.
