@@ -72,7 +72,7 @@ class CharactersFragment : Fragment() {
 
     fun newCharacter() {
         this.findNavController().navigate(
-            CharactersFragmentDirections.actionCharactersFragmentToCharacterCreationFragment()
+            CharactersFragmentDirections.actionCharactersFragmentToCharacterCreationFragment(null, this::class.java.toString())
         )
     }
 

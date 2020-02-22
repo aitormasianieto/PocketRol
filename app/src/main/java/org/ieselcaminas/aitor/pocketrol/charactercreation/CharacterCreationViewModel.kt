@@ -8,6 +8,8 @@ import org.ieselcaminas.aitor.pocketrol.database.Repo
 
 class CharacterCreationViewModel: ViewModel() {
 
+    var chrID: String = ""
+
     val repo = Repo()
 
     private val _race = MutableLiveData<MutableList<RaceOrClas>>()

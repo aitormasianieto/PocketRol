@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import org.ieselcaminas.aitor.pocketrol.R
 import org.ieselcaminas.aitor.pocketrol.databinding.FragmentCharacterCardBinding
 
@@ -23,6 +24,10 @@ class CharacterCardFragment : Fragment() {
         val binding: FragmentCharacterCardBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_character_card, container, false)
 
         binding.character = viewModel.character
+
+        binding.editButton.setOnClickListener {
+            findNavController().navigate(CharacterCardFragmentDirections.actionCharacterCardFragmentToCharacterCreationFragment(character, this::class.java.toString()))
+        }
 
         return binding.root
     }

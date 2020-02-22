@@ -13,8 +13,10 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 
 import org.ieselcaminas.aitor.pocketrol.R
+import org.ieselcaminas.aitor.pocketrol.charactercard.CharacterCardFragment
 import org.ieselcaminas.aitor.pocketrol.database.Character
 import org.ieselcaminas.aitor.pocketrol.database.RaceOrClas
 import org.ieselcaminas.aitor.pocketrol.databinding.FragmentCharacterCreationBinding
@@ -57,7 +59,7 @@ class CharacterCreationFragment : Fragment() {
             override fun onNothingSelected(parent: AdapterView<*>?) { /*Nothing happens*/ }
         }
         //BUTTON clickerS
-        binding.imgSearchButton.setOnClickListener {
+        binding.imgCheckButton.setOnClickListener {
             if (URLUtil.isValidUrl(binding.imageUrlEditText.text.toString())) {
                 binding.imageUrl = binding.imageUrlEditText.text.toString()
                 Toast.makeText(context!!, "Image updated.", Toast.LENGTH_LONG).show()
@@ -68,6 +70,16 @@ class CharacterCreationFragment : Fragment() {
         }
 
         binding.saveButton.setOnClickListener {
+            viewModel.repo.setCharacter(
+                Character(
+                    viewModel.chrID,
+                    binding.imageUrl ?: "",
+                    binding.nameEditText.text.toString(),
+                    binding.race!!.name,
+                    binding.clas!!.name
+                )
+            )
+            findNavController().navigate( CharacterCreationFragmentDirections.actionCharacterCreationFragmentToCharactersFragment())
         }
 
         //Puts data into the spinners
@@ -94,6 +106,43 @@ class CharacterCreationFragment : Fragment() {
 
         viewModel.fetchRaceOrClasData("races")
         viewModel.fetchRaceOrClasData("clases")
+
+        //Checking where does it come from
+        if (CharacterCreationFragmentArgs.fromBundle(arguments!!).fragment == CharacterCardFragment::class.java.toString()) {
+            var chr = CharacterCreationFragmentArgs.fromBundle(arguments!!).chr!!
+
+            viewModel.chrID = chr.chrId
+
+            for (r in races) {
+                if (r.name == chr.race) {
+                    binding.race = r
+                    break
+                }
+            }
+            for (c in clases) {
+                if (c.name == chr.clas) {
+                    binding.race = c
+                    break
+                }
+            }
+            binding.imageUrl = chr.imageUrl
+            binding.nameEditText.setText(chr.name)
+
+
+
+            for (r in races) {
+                if (r.name == chr.race) {
+                    binding.raceSpinner.setSelection(races.indexOf(r)+1)
+                    break
+                }
+            }
+            for (c in clases) {
+                if (c.name == chr.clas) {
+                    binding.clasSpinner.setSelection(clases.indexOf(c) + 1)
+                    break
+                }
+            }
+        }
 
         return binding.root
     }

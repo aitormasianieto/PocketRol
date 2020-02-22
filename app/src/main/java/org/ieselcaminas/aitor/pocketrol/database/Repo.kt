@@ -6,6 +6,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 class Repo {
 
@@ -68,6 +71,21 @@ class Repo {
             mutableLiveData.value = listData
         }
         return mutableLiveData
+    }
+
+    fun setCharacter(character: Character) {
+        val hashMap: HashMap<String, Any> = HashMap()
+        hashMap.put("imageUrl", character.imageUrl)
+        hashMap.put("name", character.name)
+        hashMap.put("race", character.race)
+        hashMap.put("clas", character.clas)
+
+        if (character.chrId == "") {
+            firebaseFirestoreInstance.collection("users").document(userUid).collection("characters").add(hashMap)
+        }
+        else {
+            firebaseFirestoreInstance.collection("users").document(userUid).collection("characters").document(character.chrId).set(hashMap)
+        }
     }
 
     fun getRacesOrClases(what: String): MutableLiveData<MutableList<RaceOrClas>> {

@@ -22,6 +22,9 @@
         <argument
             android:name="chr"
             app:argType="org.ieselcaminas.aitor.pocketrol.database.Character" />
+        <action
+            android:id="@+id/action_characterCardFragment_to_characterCreationFragment"
+            app:destination="@id/characterCreationFragment" />
     </fragment>
     <fragment
         android:id="@+id/lobbyFragment"
@@ -38,5 +41,13 @@
         <action
             android:id="@+id/action_characterCreationFragment_to_charactersFragment"
             app:destination="@id/charactersFragment" />
+        <argument
+            android:name="chr"
+            app:argType="org.ieselcaminas.aitor.pocketrol.database.Character"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="fragment"
+            app:argType="string" />
     </fragment>
 </navigation>
