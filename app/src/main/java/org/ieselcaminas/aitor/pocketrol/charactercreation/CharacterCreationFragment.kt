@@ -2,6 +2,7 @@ package org.ieselcaminas.aitor.pocketrol.charactercreation
 
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -92,6 +93,24 @@ class CharacterCreationFragment : Fragment() {
             }
                 binding.raceSpinner.adapter =
                     ArrayAdapter<String>(context!!, android.R.layout.simple_spinner_item, names)
+
+            //cosas nazis
+            if (CharacterCreationFragmentArgs.fromBundle(arguments!!).fragment == CharacterCardFragment::class.java.toString()) {
+                var chr = CharacterCreationFragmentArgs.fromBundle(arguments!!).chr!!
+
+                for (r in races) {
+                    Log.i("CreationR", r.toString())
+
+                    if (r.name == chr.race) {
+                        binding.raceSpinner.setSelection(races.indexOf(r) + 1)
+                        Log.i("CreationR", "Races: " + (races.indexOf(r) + 1).toString())
+                        break
+                    }
+                }
+            }
+            //----------
+
+
         })
         viewModel.clas.observe(viewLifecycleOwner, Observer {
             val names: MutableList<String> = mutableListOf()
@@ -102,10 +121,32 @@ class CharacterCreationFragment : Fragment() {
             }
             binding.clasSpinner.adapter =
                 ArrayAdapter<String>(context!!, android.R.layout.simple_spinner_item, names)
+
+            //cosas nazis
+            if (CharacterCreationFragmentArgs.fromBundle(arguments!!).fragment == CharacterCardFragment::class.java.toString()) {
+                var chr = CharacterCreationFragmentArgs.fromBundle(arguments!!).chr!!
+
+                for (c in clases) {
+                    Log.i("CreationC", c.toString())
+                    Log.i("CreationC", "Clas" + chr.clas)
+
+                    if (c.name == chr.clas) {
+                        binding.clasSpinner.setSelection(clases.indexOf(c) + 1)
+                        Log.i("CreationC", ("Clases: " + clases.indexOf(c) + 1).toString())
+                        break
+                    }
+                }
+            }
+
+            //----------
+
+
         })
 
         viewModel.fetchRaceOrClasData("races")
         viewModel.fetchRaceOrClasData("clases")
+
+
 
         //Checking where does it come from
         if (CharacterCreationFragmentArgs.fromBundle(arguments!!).fragment == CharacterCardFragment::class.java.toString()) {
@@ -113,7 +154,7 @@ class CharacterCreationFragment : Fragment() {
 
             viewModel.chrID = chr.chrId
 
-            for (r in races) {
+            /*for (r in races) {
                 if (r.name == chr.race) {
                     binding.race = r
                     break
@@ -121,16 +162,17 @@ class CharacterCreationFragment : Fragment() {
             }
             for (c in clases) {
                 if (c.name == chr.clas) {
-                    binding.race = c
+                    binding.clas = c
                     break
                 }
-            }
+            }*/
             binding.imageUrl = chr.imageUrl
             binding.nameEditText.setText(chr.name)
 
 
 
-            for (r in races) {
+            /*for (r in races) {
+
                 if (r.name == chr.race) {
                     binding.raceSpinner.setSelection(races.indexOf(r)+1)
                     break
@@ -141,11 +183,10 @@ class CharacterCreationFragment : Fragment() {
                     binding.clasSpinner.setSelection(clases.indexOf(c) + 1)
                     break
                 }
-            }
+            }*/
         }
 
         return binding.root
     }
-
 
 }

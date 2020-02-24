@@ -38,13 +38,15 @@ class Repo {
                         val imageUrl = doc.getString("imageUrl")
                         val name = doc.getString("name")
                         val race = doc.getString("race")
+                        val clas = doc.getString("clas")
 
                         listData.add(
                             Character(
                                 chrId,
                                 imageUrl!!,
                                 name!!,
-                                race!!
+                                race!!,
+                                clas!!
                             )
                         )
                     }
@@ -53,13 +55,16 @@ class Repo {
                         val imageUrl = doc.getString("imageUrl")
                         val name = doc.getString("name")
                         val race = doc.getString("race")
+                        val clas = doc.getString("clas")
+
 
                         val index = listData.indexOf(listData.find { it.chrId == doc.id })
                         listData[index] = Character(
                             chrId,
                             imageUrl!!,
                             name!!,
-                            race!!
+                            race!!,
+                            clas!!
                         )
                     }
                     DocumentChange.Type.REMOVED -> {
