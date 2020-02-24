@@ -154,36 +154,8 @@ class CharacterCreationFragment : Fragment() {
 
             viewModel.chrID = chr.chrId
 
-            /*for (r in races) {
-                if (r.name == chr.race) {
-                    binding.race = r
-                    break
-                }
-            }
-            for (c in clases) {
-                if (c.name == chr.clas) {
-                    binding.clas = c
-                    break
-                }
-            }*/
             binding.imageUrl = chr.imageUrl
             binding.nameEditText.setText(chr.name)
-
-
-
-            /*for (r in races) {
-
-                if (r.name == chr.race) {
-                    binding.raceSpinner.setSelection(races.indexOf(r)+1)
-                    break
-                }
-            }
-            for (c in clases) {
-                if (c.name == chr.clas) {
-                    binding.clasSpinner.setSelection(clases.indexOf(c) + 1)
-                    break
-                }
-            }*/
         }
 
         return binding.root
